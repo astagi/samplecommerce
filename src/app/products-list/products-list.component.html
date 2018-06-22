@@ -5,6 +5,7 @@
       <h2 class='product-card__title'>{{product.name}}</h2>
       <div class='product-card__price'>{{product.price | currency}}</div>
       <p class='product-card__briefdescription'>{{product.brief_description}}</p>
+      <a [routerLink]="['/products', product.slug]">Details</a>
     </div>
   </div>
 
