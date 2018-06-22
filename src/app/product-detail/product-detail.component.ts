@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../products/product';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+
+import { switchMap } from 'rxjs/operators';
+import { ProductsService } from '../products/products.service';
+
 
 @Component({
   selector: 'app-product-detail',
@@ -10,10 +15,16 @@ export class ProductDetailComponent implements OnInit {
 
   private product: Product;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productsService:ProductsService
+  ) { }
 
   ngOnInit() {
-    this.product = new Product('Product 1', 20.0, 'Product 1 Desc', 'Product 1 Brief Desc');
+    this.route.paramMap.subscribe(params => {
+      this.product = this.productsService.getProduct(params.get('slug'))
+    });
   }
 
 }

@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     ChartComponent,
     ProductsListComponent,
     ProductDetailComponent,
-    ChartWidgetComponent
+    ChartWidgetComponent,
   ],
   imports: [
     BrowserModule,
