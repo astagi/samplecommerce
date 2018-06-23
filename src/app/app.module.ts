@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
 
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
     ChartWidgetComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(
       appRoutes,
