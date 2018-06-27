@@ -10,9 +10,17 @@ import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FormsModule } from '@angular/forms';
+
+
+import {
+  AuthGuardService as AuthGuard, AuthGuardService
+} from './auth/auth-guard.service';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
-  { path: 'chart', component: ChartComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'chart', component: ChartComponent, canActivate: [AuthGuard]  },
   { path: 'products', component: ProductsListComponent },
   { path: 'products/:slug', component: ProductDetailComponent },
 ];
@@ -25,8 +33,10 @@ const appRoutes: Routes = [
     ProductsListComponent,
     ProductDetailComponent,
     ChartWidgetComponent,
+    LoginComponent,
   ],
   imports: [
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(
@@ -34,7 +44,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

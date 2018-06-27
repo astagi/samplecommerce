@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'chart',
     'products',
     'corsheaders',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
