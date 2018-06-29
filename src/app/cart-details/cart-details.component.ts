@@ -3,6 +3,7 @@ import { CartService } from '../cart/cart.service';
 import { Cart } from '../cart/cart';
 import { ProductsService } from '../products/products.service';
 import { CartElement } from '../cart/cart-element';
+import { CartCommunicationService } from '../cart/cart-communication.service';
 
 
 @Component({
@@ -14,7 +15,11 @@ export class CartDetailsComponent implements OnInit {
 
   cart: Cart;
 
-  constructor(private cartService:CartService, private productService:ProductsService) { }
+  constructor(
+    private cartService:CartService,
+    private productService:ProductsService,
+    private cartCommunicationService: CartCommunicationService
+  ) { }
 
   ngOnInit() {
     this.cartService.getMyCart().subscribe(cart => this.cart = cart)
@@ -24,6 +29,7 @@ export class CartDetailsComponent implements OnInit {
     this.productService.removeProductFromCart(cartElement.product).subscribe(
       res => {
         this.cart.products = this.cart.products.filter(obj => obj !== cartElement)
+        this.cartCommunicationService.setValue(res)
       }
     )
   }
@@ -31,7 +37,7 @@ export class CartDetailsComponent implements OnInit {
   updateQuantity(cartElement: CartElement) {
     this.productService.updateProductFromCart(cartElement.product, cartElement.quantity).subscribe(
       res => {
-
+        this.cartCommunicationService.setValue(res)
       }
     )
   }

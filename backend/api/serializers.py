@@ -22,8 +22,21 @@ class CartElementSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
 
     products = CartElementSerializer(source='cartelement_set', many=True)
+    total = serializers.SerializerMethodField()
+    n_products = serializers.SerializerMethodField()
 
     class Meta:
         model = Cart
-        fields = ('id', 'user', 'products')
+        fields = ('id', 'user', 'products', 'total', 'n_products')
 
+    def get_n_products(self, obj):
+        n_products = 0
+        for cart_element in CartElement.objects.filter(cart=obj):
+            n_products = cart_element.quantity
+        return n_products
+
+    def get_total(self, obj):
+        total = 0
+        for cart_element in CartElement.objects.filter(cart=obj):
+            total = cart_element.quantity * cart_element.product.price
+        return total

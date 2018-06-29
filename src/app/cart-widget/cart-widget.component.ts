@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartCommunicationService } from '../cart/cart-communication.service';
+import { Cart } from '../cart/cart';
 
 @Component({
   selector: 'app-cart-widget',
@@ -7,11 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartWidgetComponent implements OnInit {
 
-  private nProducts: number = 0;
+  private cart: Cart;
 
-  constructor() { }
+  constructor(private cartCommunicationService: CartCommunicationService) { }
 
   ngOnInit() {
+    this.cartCommunicationService.getValue().subscribe(
+      cart => {
+        this.cart = cart
+        if (!cart)
+          return
+        console.log(this.cart)
+      }
+    )
   }
 
 }

@@ -1,12 +1,12 @@
 from django.db import models
 from django.conf import settings
 
+
 class Cart(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    products = models.ManyToManyField('products.Product')
 
     def add_product(self, product, quantity):
         if product:
@@ -35,6 +35,7 @@ class Cart(models.Model):
             )
             cart_element.quantity = quantity
             cart_element.save()
+
 
 class CartElement(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)

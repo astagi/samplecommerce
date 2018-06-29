@@ -12,9 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 
-import {
-  AuthGuardService as AuthGuard, AuthGuardService
-} from './auth/auth-guard.service';
+import {AuthGuardService as AuthGuard} from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { CartDetailsComponent } from './cart-details/cart-details.component';
 

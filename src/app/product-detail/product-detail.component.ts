@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 import { switchMap } from 'rxjs/operators';
 import { ProductsService } from '../products/products.service';
+import { CartCommunicationService } from '../cart/cart-communication.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productsService:ProductsService
+    private productsService:ProductsService,
+    private cartCommunicationService: CartCommunicationService
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class ProductDetailComponent implements OnInit {
   addToCart(quantity: number) {
     this.productsService.addProductToCart(this.product, quantity).subscribe(
       res => {
-        console.log(res)
+        this.cartCommunicationService.setValue(res)
       }
     )
   }
