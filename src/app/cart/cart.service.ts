@@ -10,7 +10,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class CartService {
 
-  private cartUrl = 'http://localhost:8000/api/products/cart'
+  private cartUrl = 'http://localhost:8000/api/carts/personal'
 
   constructor(private http: HttpClient, private authService:AuthService) {}
 
