@@ -1,0 +1,17 @@
+<h2>My Cart</h2>
+
+<div *ngIf='cart'>
+  <div class='product-list'>
+    <div *ngIf='cart.products.length === 0'>No elements in your cart</div>
+    <div *ngFor='let product of cart.products'>
+      <div class='product-card'>
+        <h3 class='product-card__title'>{{product.name}}</h3>
+        <div class='product-card__price'>{{product.price | currency}}</div>
+        <p class='product-card__briefdescription'>{{product.brief_description}}</p>
+        <a [routerLink]="['/products', product.slug]">Details</a>
+        <button (click)='removeProduct(product)'>Remove</button>
+      </div>
+    </div>
+
+  </div>
+</div>

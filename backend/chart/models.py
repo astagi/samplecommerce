@@ -9,6 +9,10 @@ class Chart(models.Model):
     )
     products = models.ManyToManyField('products.Product')
 
-    def add_product(product):
+    def add_product(self, product):
         if product:
             self.products.add(product)
+
+    def remove_product(self, product):
+        if product:
+            self.products.remove(product)

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -26,6 +27,16 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return token != null;
+  }
+
+  public getAuthHeaders() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization' : 'Token ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      })
+    };
+    return httpOptions;
   }
 
 

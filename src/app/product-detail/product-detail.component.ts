@@ -29,4 +29,12 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  addToCart() {
+    this.productsService.addProductToCart(this.product).subscribe(
+      res => {
+        console.log(res)
+      }
+    )
+  }
+
 }

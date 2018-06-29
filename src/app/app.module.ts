@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ChartComponent } from './chart/chart.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
+import { CartWidgetComponent } from './cart-widget/cart-widget.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,10 +16,11 @@ import {
   AuthGuardService as AuthGuard, AuthGuardService
 } from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'chart', component: ChartComponent, canActivate: [AuthGuard]  },
+  { path: 'cart', component: CartDetailsComponent, canActivate: [AuthGuard]  },
   { path: 'products', component: ProductsListComponent },
   { path: 'products/:slug', component: ProductDetailComponent },
 ];
@@ -29,10 +29,10 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ChartComponent,
+    CartDetailsComponent,
     ProductsListComponent,
     ProductDetailComponent,
-    ChartWidgetComponent,
+    CartWidgetComponent,
     LoginComponent,
   ],
   imports: [

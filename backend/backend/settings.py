@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'chart',
     'products',
     'corsheaders',
-    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +54,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'COERCE_DECIMAL_TO_STRING': False
+}
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -125,11 +133,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING': False
-}
-
-
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
 )
@@ -141,4 +144,17 @@ CORS_ALLOW_METHODS = (
     'PATCH',
     'POST',
     'PUT',
+)
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'Authorization',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 )
