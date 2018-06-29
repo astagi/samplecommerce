@@ -1,5 +1,5 @@
 from products.models import Product
-from chart.models import Chart
+from cart.models import Cart, CartElement
 
 from rest_framework import routers, serializers, viewsets
 
@@ -10,14 +10,20 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CartSerializer(serializers.ModelSerializer):
+class CartElementSerializer(serializers.ModelSerializer):
 
-    products = ProductSerializer(many=True)
-    cart_items_count = serializers.SerializerMethodField()
+    product = ProductSerializer()
 
     class Meta:
-        model = Chart
-        fields = ('id', 'user','products', 'cart_items_count')
+        model = CartElement
+        fields = ('quantity', 'product')
 
-    def get_cart_items_count(self, obj):
-        return obj.products.count()
+
+class CartSerializer(serializers.ModelSerializer):
+
+    products = CartElementSerializer(source='cartelement_set', many=True)
+
+    class Meta:
+        model = Cart
+        fields = ('id', 'user', 'products')
+

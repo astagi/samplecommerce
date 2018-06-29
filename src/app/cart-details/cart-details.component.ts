@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { Cart } from '../cart/cart';
 import { ProductsService } from '../products/products.service';
-import { Product } from '../products/product';
+import { CartElement } from '../cart/cart-element';
+
 
 @Component({
   selector: 'app-cart-details',
@@ -19,10 +20,18 @@ export class CartDetailsComponent implements OnInit {
     this.cartService.getMyCart().subscribe(cart => this.cart = cart)
   }
 
-  removeProduct(product: Product) {
-    this.productService.removeProductFromCart(product).subscribe(
+  removeProduct(cartElement: CartElement) {
+    this.productService.removeProductFromCart(cartElement.product).subscribe(
       res => {
-        this.cart.products = this.cart.products.filter(obj => obj !== product)
+        this.cart.products = this.cart.products.filter(obj => obj !== cartElement)
+      }
+    )
+  }
+
+  updateQuantity(cartElement: CartElement) {
+    this.productService.updateProductFromCart(cartElement.product, cartElement.quantity).subscribe(
+      res => {
+
       }
     )
   }

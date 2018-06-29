@@ -17,7 +17,6 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private productsService:ProductsService
   ) { }
 
@@ -29,8 +28,8 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  addToCart() {
-    this.productsService.addProductToCart(this.product).subscribe(
+  addToCart(quantity: number) {
+    this.productsService.addProductToCart(this.product, quantity).subscribe(
       res => {
         console.log(res)
       }

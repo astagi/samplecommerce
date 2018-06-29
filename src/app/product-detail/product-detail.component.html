@@ -4,7 +4,8 @@
     <h2 class='product__title'>{{product.name}}</h2>
     <div class='product__price'>{{product.price | currency}}</div>
     <p class='product__description'>{{product.description}}</p>
-    <button (click)='addToCart()'>Add to cart</button>
+    <input #quantity type="number" placeholder="Quantity" keyboardType="number"/>
+    <button (click)='addToCart(+quantity.value)'>Add to cart</button>
   </div>
 
 </div>

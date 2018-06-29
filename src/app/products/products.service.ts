@@ -25,9 +25,9 @@ export class ProductsService {
     return this.http.get<Product>(this.productsUrl + slug)
   }
 
-  addProductToCart(product: Product):Observable<Cart> {
+  addProductToCart(product: Product, quantity: number):Observable<Cart> {
     return this.http.post<Cart>(
-      `${this.productsUrl}${product.slug}/add_to_cart/`, {},
+      `${this.productsUrl}${product.slug}/add_to_cart/`, {quantity: quantity},
       this.authService.getAuthHeaders()
     )
   }
@@ -35,6 +35,13 @@ export class ProductsService {
   removeProductFromCart(product: Product):Observable<Cart> {
     return this.http.post<Cart>(
       `${this.productsUrl}${product.slug}/remove_from_cart/`, {},
+      this.authService.getAuthHeaders()
+    )
+  }
+
+  updateProductFromCart(product: Product, quantity: number):Observable<Cart> {
+    return this.http.post<Cart>(
+      `${this.productsUrl}${product.slug}/update_from_cart/`, {quantity: quantity},
       this.authService.getAuthHeaders()
     )
   }
