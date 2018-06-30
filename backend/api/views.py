@@ -41,12 +41,6 @@ class ProductsViewSet(
         serializer = CartSerializer(cart)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @list_route(methods=['GET'], permission_classes = (IsAuthenticated,))
-    def cart(self, request):
-        cart, _ = Cart.objects.get_or_create(user=request.user)
-        serializer = CartSerializer(cart)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 class CartViewSet(viewsets.GenericViewSet):
 

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { ProductsService } from '../products/products.service';
 import { CartCommunicationService } from '../cart/cart-communication.service';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsService:ProductsService,
-    private cartCommunicationService: CartCommunicationService
+    private cartCommunicationService: CartCommunicationService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -32,10 +34,14 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(quantity: number) {
     this.productsService.addProductToCart(this.product, quantity).subscribe(
-      res => {
-        this.cartCommunicationService.setValue(res)
+      cart => {
+        this.cartCommunicationService.setValue(cart)
       }
     )
+  }
+
+  isLoggedIn() {
+    return this.authService.isAuthenticated()
   }
 
 }

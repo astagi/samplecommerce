@@ -32,11 +32,11 @@ class CartSerializer(serializers.ModelSerializer):
     def get_n_products(self, obj):
         n_products = 0
         for cart_element in CartElement.objects.filter(cart=obj):
-            n_products = cart_element.quantity
+            n_products += cart_element.quantity
         return n_products
 
     def get_total(self, obj):
         total = 0
         for cart_element in CartElement.objects.filter(cart=obj):
-            total = cart_element.quantity * cart_element.product.price
+            total += cart_element.quantity * cart_element.product.price
         return total
