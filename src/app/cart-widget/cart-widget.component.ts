@@ -17,9 +17,6 @@ export class CartWidgetComponent implements OnInit {
     this.cartCommunicationService.getValue().subscribe(
       cart => {
         this.cart = cart
-        if (!cart)
-          return
-        console.log(this.cart)
       }
     )
   }

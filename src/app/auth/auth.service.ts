@@ -20,8 +20,13 @@ export class AuthService {
     )
   }
 
+  public logout(){
+    localStorage.removeItem('token')
+  }
+
   private setSession(authResult) {
     localStorage.setItem('token', authResult.token);
+
   }
 
   public isAuthenticated(): boolean {

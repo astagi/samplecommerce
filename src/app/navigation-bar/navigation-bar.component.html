@@ -1,0 +1,6 @@
+<nav>
+    <a routerLink="/products" routerLinkActive="active">Products</a>
+    <span *ngIf='isLoggedIn()'> | <app-cart-widget></app-cart-widget></span>
+    <span *ngIf='isLoggedIn()'> | <a routerLink="/logout" routerLinkActive="active">Logout</a></span>
+    <span *ngIf='!isLoggedIn()'> | <a routerLink="/login" routerLinkActive="active">Login</a></span>
+  </nav>
